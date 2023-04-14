@@ -50,7 +50,6 @@ void _print(T t, V... v)
 #endif
 /* MACROS */
 typedef long long int ll;
-
 typedef pair<int, int> pii;
 typedef pair<ll, ll> pll;
 
@@ -60,7 +59,6 @@ typedef vector<pii> vpii;
 typedef vector<pll> vpll;
 typedef priority_queue<ll> maxheap;
 typedef priority_queue<ll, vll, greater<ll>> minheap;
-
 typedef map<int, int> mii;
 typedef tuple<int, int, int> tup;
 
@@ -148,18 +146,17 @@ void solve()
  
     long long pow = 1; 
     for(int i = 1 ; i < n; i++){
-        hashes_i[i] = (hashes_i[i - 1] + (s[i] - 'a' + 1)*p*p_pow[i])%m; 
+        hashes_i[i] = (hashes_i[i - 1] + (s[i] - 'a' + 1)*p_pow[i])%m; 
     }
-    _print(hashes_i); 
+  
     int i = 0, j = n - 1; 
     vector<int> ans;
     while (i < n-1 && j >= 1)
     { 
-      long long prefixHash = (hashes_i[i]*p_pow[j - 1])%m; 
+
+      long long prefixHash = (hashes_i[i]*p_pow[j])%m ; 
       long long suffixHash = (hashes_i[n - 1] - hashes_i[j - 1] + m)%m; 
-      
-      _print(prefixHash , suffixHash); 
-      if(prefixHash == suffixHash){
+      if(prefixHash== suffixHash){
          ans.push_back(i + 1); 
       }
       i++,j--; 

@@ -139,52 +139,38 @@ void solve()
     {
         mpp[c]++;
     }
-    int count = 0;
-    for (auto e : mpp)
+    int odd_count = 0;
+
+    for (auto m : mpp)
     {
-        if (e.second % 2 != 0 && n % 2 == 0 || (e.second % 2 != 0 && count > 1))
+        if (m.second % 2 != 0)
+        {
+            odd_count++;
+        }
+        if (odd_count > 1)
         {
             cout << "NO SOLUTION";
             return;
         }
-        else if (e.second % 2 != 0 && count < 1)
-        {
-            count++;
-        }
-    }
-    s.clear();
-    char c;
-    for (auto e : mpp)
-    {
-        if (e.second != 1)
-        {
-            s += string(e.second / 2, e.first);
-        }
-        else
-        {
-            c = e.first;
-        }
-    }
-    s += c;
-    n = s.size();
-    if (n % 2 == 0)
-    {
-        for (int i = 0; i < n; i++)
-        {
-            s += s[i];
-        }
-    }
-    else
-    {
-        for (int i = 0; i < n - 1; i++)
-        {
-            s += s[i];
-        }
     }
 
-    reverse(s.begin() + n, s.end());
+    string first_half;
+    char odd_char = '#';
+    for (auto m : mpp)
+    {
+        first_half.append(m.second / 2, m.first);
+        if (m.second % 2 != 0)
+            odd_char = m.first;
+    }
 
-    cout << s << endl;
+    string second_half = first_half;
+    reverse(second_half.begin(), second_half.end());
+    if (odd_char != '#')
+    {
+        first_half.append(1, odd_char);
+    }
+    first_half.append(second_half);
+    cout << first_half << endl;
 }
 
 int main()
